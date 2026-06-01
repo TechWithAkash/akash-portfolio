@@ -38,7 +38,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="w-full max-w-2xl mx-auto px-6 pt-16 pb-12 transition-colors duration-300">
+    <section id="hero" className="w-full max-w-2xl mx-auto px-6 pt-0 pb-0 transition-colors duration-300">
       <div className="flex flex-col gap-6 text-left">
         {/* Profile Header Row */}
         <motion.div
@@ -117,7 +117,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex flex-col gap-3.5 mt-2 border-t border-[var(--border-subtle)] pt-6"
+          className="flex flex-col gap-3.5 mt-1.5 border-t border-[var(--border-subtle)] pt-3.5"
         >
           <div className="flex items-center gap-1.5 flex-wrap">
             {SOCIALS.map((social) => {

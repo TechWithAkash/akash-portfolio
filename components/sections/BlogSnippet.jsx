@@ -23,10 +23,10 @@ export default function BlogSnippet() {
   const router = useRouter();
 
   return (
-    <section id="blog-snippet" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-6">
+    <section id="blog-snippet" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Section Heading */}
-        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
           Blog
         </h2>
 
@@ -65,7 +65,7 @@ export default function BlogSnippet() {
         </div>
 
         {/* Show all blogs link */}
-        <div className="mt-8 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <button
             onClick={() => router.push("/blog")}
             className="group/btn inline-flex items-center justify-center rounded-lg border border-[var(--border-bright)] bg-[var(--bg-secondary)] px-4 py-2 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-all cursor-pointer shadow-sm"

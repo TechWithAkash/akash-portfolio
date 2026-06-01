@@ -7,10 +7,10 @@ import { GithubIcon } from "@/components/ui/Icons";
 
 export default function Projects() {
   return (
-    <section id="projects" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-6">
+    <section id="projects" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Section Heading */}
-        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
           Featured Projects
         </h2>
 

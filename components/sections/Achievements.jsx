@@ -9,15 +9,15 @@ export default function Achievements() {
   const rest = ACHIEVEMENTS.filter(a => !a.highlight);
 
   return (
-    <section id="achievements" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-6">
-        {/* Section Heading */}
-        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+    <section id="achievements" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-4">
+         {/* Section Heading */}
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
           Recognition & Achievements
         </h2>
 
         {/* Highlighted items */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
           {highlighted.map((ach, idx) => (
             <motion.div
               key={ach.id}

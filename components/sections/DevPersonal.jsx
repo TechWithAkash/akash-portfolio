@@ -38,10 +38,10 @@ export default function DevPersonal() {
   ];
 
   return (
-    <section id="dev-personal" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-6">
+    <section id="dev-personal" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Development Section */}
-        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-3">
           Development
         </h2>
         <div className="flex flex-col gap-3">
@@ -66,7 +66,7 @@ export default function DevPersonal() {
         </div>
 
         {/* Personal Section */}
-        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mt-10 mb-4">
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mt-6 mb-3">
           Personal
         </h2>
         <div className="flex flex-col gap-3">
@@ -96,7 +96,7 @@ export default function DevPersonal() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="relative overflow-hidden mt-10 p-8 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] flex items-center justify-center min-h-[100px] transition-colors duration-300 shadow-sm"
+          className="relative overflow-hidden mt-6 p-5 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] flex items-center justify-center min-h-[80px] transition-colors duration-300 shadow-sm"
         >
           {/* Big Elegant Quote Marks in Background */}
           <div className="absolute top-[-10px] left-4 text-[120px] font-serif font-black text-[var(--text-muted)] opacity-[0.06] select-none pointer-events-none leading-none">

@@ -6,10 +6,10 @@ import { Award, BookOpen, GraduationCap } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="education" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-6">
+    <section id="education" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Section Title */}
-        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
           Academic Credentials
         </h2>
 
@@ -51,7 +51,7 @@ export default function About() {
         </div>
 
         {/* Personal Bio Narrative */}
-        <div className="mt-10 p-5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50">
+        <div className="mt-6 p-5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50">
           <p className="text-[13.5px] leading-relaxed text-[var(--text-secondary)]">
             {ABOUT.paragraphs.join(" ")}
           </p>
