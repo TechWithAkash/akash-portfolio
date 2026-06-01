@@ -38,7 +38,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="w-full max-w-2xl mx-auto px-6 pt-0 pb-0 transition-colors duration-300">
+    <section id="hero" className="w-full max-w-2xl mx-auto px-4 sm:px-6 pt-0 pb-0 transition-colors duration-300">
       <div className="flex flex-col gap-6 text-left">
         {/* Profile Header Row */}
         <motion.div
@@ -61,31 +61,34 @@ export default function Hero() {
             <h1 className="text-2.5xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl font-sans">
               {PERSONAL.name}
             </h1>
-            <p className="text-[13.5px] text-[var(--text-secondary)] font-medium flex flex-wrap items-center gap-x-2 gap-y-1.5">
-              <span>Full-Stack Engineer</span>
-              <span className="text-[var(--text-muted)] font-normal">·</span>
-              <span>AI Specialist</span>
-              <span className="text-[var(--text-muted)] font-normal">·</span>
-              <span 
-                className="inline-flex items-center gap-1.5 group/email cursor-pointer text-[var(--text-secondary)] hover:text-[var(--text-primary)] select-all"
-                onClick={handleCopyEmail}
-                title="Click to copy email address"
-              >
-                <span className="underline decoration-dotted decoration-[var(--text-muted)] underline-offset-4 font-normal">
-                  {PERSONAL.email}
-                </span>
-                {copied ? (
-                  <CheckIcon size={12} className="text-green-500" />
-                ) : (
-                  <CopyIcon size={12} className="text-[var(--text-muted)] group-hover/email:text-[var(--text-primary)] transition-colors shrink-0" />
-                )}
-                {copied && (
-                  <span className="text-[10px] text-green-500 font-mono ml-0.5">
-                    Copied!
+            <div className="flex flex-col gap-1 text-[13.5px] text-[var(--text-secondary)] font-medium">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                <span>Full-Stack Engineer</span>
+                <span className="text-[var(--text-muted)] font-normal">·</span>
+                <span>AI Specialist</span>
+              </div>
+              <div className="mt-0.5 flex items-center">
+                <span 
+                  className="inline-flex items-center gap-1.5 group/email cursor-pointer text-[var(--text-secondary)] hover:text-[var(--text-primary)] select-all"
+                  onClick={handleCopyEmail}
+                  title="Click to copy email address"
+                >
+                  <span className="underline decoration-dotted decoration-[var(--text-muted)] underline-offset-4 font-normal break-all text-[13px] sm:text-[13.5px]">
+                    {PERSONAL.email}
                   </span>
-                )}
-              </span>
-            </p>
+                  {copied ? (
+                    <CheckIcon size={12} className="text-green-500" />
+                  ) : (
+                    <CopyIcon size={12} className="text-[var(--text-muted)] group-hover/email:text-[var(--text-primary)] transition-colors shrink-0" />
+                  )}
+                  {copied && (
+                    <span className="text-[10px] text-green-500 font-mono ml-0.5">
+                      Copied!
+                    </span>
+                  )}
+                </span>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -104,11 +107,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="flex items-center gap-2 text-[12.5px] text-[var(--text-muted)] font-mono"
+          className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-[var(--text-muted)] font-mono leading-relaxed"
         >
-          <Disc size={13} className="animate-spin text-[var(--accent)]" />
-          <span>Currently shipping</span>
-          <span>—</span>
+          <div className="flex items-center gap-2">
+            <Disc size={13} className="animate-spin text-[var(--accent)] shrink-0" />
+            <span>Currently shipping</span>
+          </div>
+          <span className="hidden sm:inline">—</span>
           <span className="text-[var(--text-secondary)] font-medium">WealthWise AI Dashboard</span>
         </motion.div>
 

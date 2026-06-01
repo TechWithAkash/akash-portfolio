@@ -45,33 +45,33 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+    <section id="contact" className="w-full max-w-2xl mx-auto px-4 sm:px-6 py-2 transition-colors duration-300">
       <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Section Title */}
         <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
           Let&apos;s Build Something
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div className="flex flex-col gap-6">
           {/* Left Column: Coordinates */}
-          <div className="md:col-span-5 flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <p className="text-[13.5px] leading-relaxed text-[var(--text-secondary)]">
               I am actively seeking software engineering internships and junior SDE roles. If you&apos;re building high-quality product applications and need a detail-oriented full-stack developer, I would love to hear from you.
             </p>
 
-            <div className="flex flex-col gap-4 text-xs font-mono text-[var(--text-secondary)]">
+            <div className="flex flex-col gap-3 text-xs font-mono text-[var(--text-secondary)]">
               <div className="flex items-center gap-3">
-                <Mail size={13} className="text-[var(--text-muted)]" />
-                <a href={`mailto:${PERSONAL.email}`} className="hover:text-[var(--accent)] hover:underline">
+                <Mail size={13} className="text-[var(--text-muted)] shrink-0" />
+                <a href={`mailto:${PERSONAL.email}`} className="hover:text-[var(--accent)] hover:underline break-all">
                   {PERSONAL.email}
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <MapPin size={13} className="text-[var(--text-muted)]" />
+                <MapPin size={13} className="text-[var(--text-muted)] shrink-0" />
                 <span>{PERSONAL.location}</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="h-2 w-2 rounded-full bg-[var(--color-status-green)] animate-pulse"></span>
+                <span className="h-2 w-2 rounded-full bg-[var(--color-status-green)] animate-pulse shrink-0"></span>
                 <span className="text-[11px] uppercase tracking-wider text-[var(--color-status-green)] font-bold">
                   {PERSONAL.availability}
                 </span>
@@ -79,8 +79,8 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Column: Form */}
-          <div className="md:col-span-7 p-6 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] shadow-sm">
+          {/* Form */}
+          <div className="p-4 sm:p-6 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] shadow-sm">
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-1.5">
                 <label className="text-[11px] font-mono tracking-wider uppercase text-[var(--text-muted)]">

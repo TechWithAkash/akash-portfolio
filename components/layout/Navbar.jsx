@@ -139,41 +139,41 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-40 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-glass)] backdrop-blur-md transition-colors duration-300">
-        <div className="mx-auto flex h-14 max-w-2xl items-center justify-between px-6">
+        <div className="mx-auto flex h-14 max-w-2xl items-center justify-between px-4 sm:px-6">
           {/* Left Side: Navigation Links */}
-          <nav className="flex items-center gap-4 sm:gap-5 text-sm font-medium">
+          <nav className="flex items-center gap-3 sm:gap-5 text-sm font-medium">
             <button
               onClick={() => navigateTo("/", "hero")}
-              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[13px] font-medium cursor-pointer"
+              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[12px] sm:text-[13px] font-medium cursor-pointer"
             >
               Home
             </button>
             <button
               onClick={() => router.push("/work")}
-              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[13px] font-medium cursor-pointer"
+              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[12px] sm:text-[13px] font-medium cursor-pointer"
             >
               Work
             </button>
             <button
               onClick={() => router.push("/blog")}
-              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[13px] font-medium cursor-pointer"
+              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[12px] sm:text-[13px] font-medium cursor-pointer"
             >
               Blog
             </button>
             <button
               onClick={() => router.push("/resume")}
-              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[13px] font-medium cursor-pointer"
+              className="text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] text-[12px] sm:text-[13px] font-medium cursor-pointer"
             >
               Resume
             </button>
           </nav>
 
           {/* Right Side: Tools (Search & Theme Toggle) */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Command Palette Button */}
             <button
               onClick={() => setIsPaletteOpen(true)}
-              className="flex h-8 items-center gap-1.5 px-2.5 rounded-lg border border-[var(--border-bright)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-all font-mono cursor-pointer"
+              className="flex h-8 w-8 sm:w-auto items-center justify-center sm:gap-1.5 sm:px-2.5 rounded-lg border border-[var(--border-bright)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-all font-mono cursor-pointer"
               title="Open Search"
             >
               <Search size={13} />

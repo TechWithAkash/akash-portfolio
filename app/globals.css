@@ -109,6 +109,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   transition: background-color 300ms ease, color 300ms ease;
+  /* Prevent content from going under iOS notch */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Mobile: prevent any child from causing horizontal scroll */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Cinematic background lighting */

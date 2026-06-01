@@ -23,7 +23,7 @@ export default function BlogSnippet() {
   const router = useRouter();
 
   return (
-    <section id="blog-snippet" className="w-full max-w-2xl mx-auto px-6 py-2 transition-colors duration-300">
+    <section id="blog-snippet" className="w-full max-w-2xl mx-auto px-4 sm:px-6 py-2 transition-colors duration-300">
       <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Section Heading */}
         <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-4">
@@ -39,27 +39,28 @@ export default function BlogSnippet() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-elevated)] transition-colors duration-300 cursor-pointer"
+              className="group flex flex-col gap-3 p-4 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-elevated)] transition-colors duration-300 cursor-pointer"
               onClick={() => router.push("/blog")}
             >
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[14.5px] font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-tight">
                   {post.title}
                 </h3>
-                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed line-clamp-1 max-w-xl">
+                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed line-clamp-2">
                   {post.description}
                 </p>
-                <span className="text-[11px] text-[var(--text-muted)] font-mono flex items-center gap-1.5">
-                  <Calendar size={11} />
-                  {post.date}
-                </span>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[11px] text-[var(--text-muted)] font-mono flex items-center gap-1.5">
+                    <Calendar size={11} />
+                    {post.date}
+                  </span>
+                  {/* Read more -> */}
+                  <span className="flex items-center gap-1 text-[12.5px] font-semibold text-[var(--accent)] shrink-0 font-sans group-hover:translate-x-0.5 duration-200">
+                    Read more
+                    <ArrowRight size={12} />
+                  </span>
+                </div>
               </div>
-
-              {/* Read more -> */}
-              <span className="flex items-center gap-1 text-[12.5px] font-semibold text-[var(--accent)] shrink-0 font-sans group-hover:translate-x-1 duration-200">
-                Read more
-                <ArrowRight size={12} />
-              </span>
             </motion.article>
           ))}
         </div>

@@ -50,6 +50,16 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F8FAFC" },
+    { media: "(prefers-color-scheme: dark)", color: "#05050A" },
+  ],
+};
+
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import CursorPet from "@/components/ui/CursorPet";
 

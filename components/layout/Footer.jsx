@@ -25,7 +25,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full max-w-2xl mx-auto px-6 pt-8 pb-10 border-t border-[var(--border-subtle)] transition-colors duration-300">
+    <footer className="w-full max-w-2xl mx-auto px-4 sm:px-6 pt-8 pb-10 border-t border-[var(--border-subtle)] transition-colors duration-300">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* Left Column: Inspiring Quote */}
         <div className="md:col-span-6 flex flex-col gap-4">
