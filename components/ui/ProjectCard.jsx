@@ -58,7 +58,7 @@ export default function ProjectCard({ project, featured = false }) {
           {/* Left */}
           <div>
             <h3 style={{
-              fontFamily: "var(--font-syne), 'Syne', sans-serif",
+              fontFamily: "var(--font-sans), 'Hanken Grotesk', sans-serif",
               fontSize: "var(--text-2xl)",
               fontWeight: 700,
               color: "var(--text-primary)",
@@ -135,7 +135,7 @@ export default function ProjectCard({ project, featured = false }) {
       </div>
 
       <h3 style={{
-        fontFamily: "var(--font-syne), 'Syne', sans-serif",
+        fontFamily: "var(--font-sans), 'Hanken Grotesk', sans-serif",
         fontSize: "var(--text-xl)",
         fontWeight: 700,
         color: "var(--text-primary)",

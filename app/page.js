@@ -2,17 +2,27 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
+import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
+import Experience from "@/components/sections/Experience";
+import BlogSnippet from "@/components/sections/BlogSnippet";
+import DevPersonal from "@/components/sections/DevPersonal";
+import Achievements from "@/components/sections/Achievements";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className="relative min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
       <Navbar />
-      <main className="relative z-10 flex flex-col items-center w-full">
+      <main className="relative z-10 flex flex-col items-start w-full max-w-2xl mx-auto py-8">
         <Hero />
-        <About />
+        <Experience />
+        <BlogSnippet />
+        <DevPersonal />
         <Projects />
+        <About />
+        <Skills />
+        <Achievements />
         <Contact />
       </main>
       <Footer />

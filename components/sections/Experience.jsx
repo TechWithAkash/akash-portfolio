@@ -1,148 +1,72 @@
 "use client";
 
-import ScrollReveal from "@/components/ui/ScrollReveal";
-import { EXPERIENCE, EDUCATION } from "@/lib/constants";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { EXPERIENCE } from "@/lib/constants";
+import { useRouter } from "next/navigation";
+import { Calendar, MapPin } from "lucide-react";
 
 export default function Experience() {
+  const router = useRouter();
+
   return (
-    <section id="experience" className="section" style={{ borderTop: "1px solid var(--border)" }}>
-      <div className="container">
-        <ScrollReveal>
-          <p className="section-eyebrow">Experience</p>
-          <h2 className="section-heading" style={{ marginBottom: "48px" }}>Work History</h2>
-        </ScrollReveal>
+    <section id="experience" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-12">
+        {/* Section Heading */}
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+          Experience
+        </h2>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "start" }}>
-
-          {/* Work */}
-          <div>
-            <ScrollReveal delay={60}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
-                {EXPERIENCE.map((item, i) => (
-                  <div key={item.id} style={{ position: "relative", paddingLeft: "24px", paddingBottom: i < EXPERIENCE.length - 1 ? "36px" : 0 }}>
-                    {/* Timeline */}
-                    <div style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "6px",
-                      width: "7px",
-                      height: "7px",
-                      borderRadius: "50%",
-                      background: "var(--accent)",
-                      zIndex: 1,
-                    }} />
-                    {i < EXPERIENCE.length - 1 && (
-                      <div style={{
-                        position: "absolute",
-                        left: "3px",
-                        top: "16px",
-                        width: "1px",
-                        height: "calc(100% - 16px)",
-                        background: "var(--border)",
-                      }} />
-                    )}
-
-                    {/* Content */}
-                    <div>
-                      <div style={{ marginBottom: "10px" }}>
-                        <h3 style={{
-                          fontFamily: "var(--font-syne), 'Syne', sans-serif",
-                          fontSize: "var(--text-base)",
-                          fontWeight: 700,
-                          color: "var(--text-primary)",
-                          marginBottom: "3px",
-                        }}>{item.role}</h3>
-                        <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-                          <span style={{ color: "var(--accent)", fontSize: "var(--text-sm)", fontWeight: 500 }}>{item.company}</span>
-                          <span style={{ color: "var(--text-muted)", fontSize: "var(--text-xs)" }}>·</span>
-                          <span style={{ color: "var(--text-muted)", fontSize: "var(--text-xs)" }}>{item.location}</span>
-                          <span style={{ color: "var(--text-muted)", fontSize: "var(--text-xs)" }}>·</span>
-                          <span style={{
-                            fontSize: "var(--text-xs)",
-                            color: "var(--text-muted)",
-                            fontFamily: "var(--font-jetbrains-mono), monospace",
-                          }}>
-                            {item.duration}
-                          </span>
-                        </div>
-                      </div>
-                      <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "7px" }}>
-                        {item.bullets.map((b, bi) => (
-                          <li key={bi} style={{ display: "flex", gap: "9px", alignItems: "flex-start" }}>
-                            <ArrowRight size={12} style={{ color: "var(--accent)", flexShrink: 0, marginTop: "3px" }} />
-                            <span style={{ color: "var(--text-secondary)", fontSize: "var(--text-sm)", lineHeight: 1.65 }}>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Education */}
-          <div>
-            <ScrollReveal delay={100}>
-              <p style={{
-                fontSize: "var(--text-xs)",
-                color: "var(--text-muted)",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                fontFamily: "var(--font-jetbrains-mono), monospace",
-                marginBottom: "24px",
-              }}>
-                Education
-              </p>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "var(--border)", border: "1px solid var(--border)", borderRadius: "10px", overflow: "hidden" }}>
-                {EDUCATION.map((edu, i) => (
-                  <div key={i} style={{
-                    background: "var(--bg-secondary)",
-                    padding: "20px 22px",
-                    transition: "background var(--t-fast)",
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.background = "var(--bg-elevated)"}
-                    onMouseLeave={e => e.currentTarget.style.background = "var(--bg-secondary)"}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "6px" }}>
-                      <h3 style={{
-                        fontFamily: "var(--font-syne), 'Syne', sans-serif",
-                        fontSize: "var(--text-sm)",
-                        fontWeight: 700,
-                        color: "var(--text-primary)",
-                      }}>{edu.degree}</h3>
-                      <span style={{
-                        fontSize: "var(--text-xs)",
-                        color: "var(--accent)",
-                        fontFamily: "var(--font-jetbrains-mono), monospace",
-                        fontWeight: 600,
-                        background: "rgba(16,185,129,0.08)",
-                        padding: "2px 8px",
-                        borderRadius: "4px",
-                        border: "1px solid rgba(16,185,129,0.2)",
-                      }}>
-                        {edu.grade}
+        {/* Experience Compact List */}
+        <div className="flex flex-col gap-6">
+          {EXPERIENCE.map((exp, idx) => {
+            const isWorking = idx === 0;
+            return (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                className="group flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2"
+              >
+                {/* Left Side: Company & Role */}
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <h3 className="text-[15px] font-bold text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent)] transition-colors">
+                      {exp.company}
+                    </h3>
+                    {isWorking && (
+                      <span className="flex items-center gap-1 px-2 py-0.2 text-[9px] font-bold font-mono uppercase tracking-wider text-[var(--color-status-green)] bg-[var(--color-status-green-glow)] rounded-full">
+                        <span className="h-1 w-1 rounded-full bg-[var(--color-status-green)] animate-pulse"></span>
+                        Working
                       </span>
-                    </div>
-                    <p style={{ color: "var(--text-secondary)", fontSize: "var(--text-sm)", marginBottom: "4px" }}>{edu.institution}</p>
-                    <p style={{ color: "var(--text-muted)", fontSize: "var(--text-xs)", fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                      {edu.duration}{edu.expected ? ` · ${edu.expected}` : ""}
-                    </p>
+                    )}
                   </div>
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
+                  <span className="text-[13px] text-[var(--text-secondary)] mt-0.5">
+                    {exp.role}
+                  </span>
+                </div>
+
+                {/* Right Side: Duration & Location */}
+                <div className="flex flex-col sm:items-end gap-0.5 text-xs text-[var(--text-muted)] font-mono shrink-0">
+                  <span>{exp.duration}</span>
+                  <span>{exp.location}</span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Show all experiences button */}
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => router.push("/work")}
+            className="group/btn inline-flex items-center justify-center rounded-lg border border-[var(--border-bright)] bg-[var(--bg-secondary)] px-4 py-2 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-all cursor-pointer shadow-sm"
+          >
+            Show all work experiences
+          </button>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          #experience .container > div:last-child { grid-template-columns: 1fr !important; gap: 40px !important; }
-        }
-      `}</style>
     </section>
   );
 }

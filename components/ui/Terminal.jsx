@@ -19,7 +19,10 @@ export default function Terminal() {
   useEffect(() => {
     if (done) return;
     const { lineIdx, charIdx } = typing;
-    if (lineIdx >= allLines.length) { setDone(true); return; }
+    if (lineIdx >= allLines.length) {
+      Promise.resolve().then(() => setDone(true));
+      return;
+    }
 
     const line = allLines[lineIdx];
     const fullText = line.text;

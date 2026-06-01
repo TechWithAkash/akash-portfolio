@@ -1,134 +1,103 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ExternalLink, ArrowRight, Layers, Box, Cpu } from "lucide-react";
-import { GithubIcon } from "@/components/ui/Icons";
+import { motion } from "framer-motion";
 import { PROJECTS } from "@/lib/constants";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/ui/Icons";
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-32 bg-[var(--color-bg-primary)] z-10">
-      <div className="container mx-auto px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <span className="h-[1px] w-12 bg-[var(--color-accent-primary)]"></span>
-            <span className="text-[12px] font-mono tracking-[0.2em] uppercase text-[var(--color-accent-primary)]">
-              Architecture Overview
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-['Syne'] font-bold text-[var(--color-text-primary)] max-w-2xl leading-[1.1]">
-            Systems Engineered for Production
-          </h2>
-        </motion.div>
+    <section id="projects" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-12">
+        {/* Section Heading */}
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+          Featured Projects
+        </h2>
 
-        <div className="space-y-40">
-          {PROJECTS.map((project, i) => (
-            <ProjectShowcase key={project.id} project={project} index={i} />
+        {/* Projects Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {PROJECTS.map((project, idx) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="group flex flex-col justify-between p-5 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-elevated)] transition-colors duration-300 relative"
+            >
+              <div>
+                {/* Header Row */}
+                <div className="flex items-center justify-between mb-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 text-[10.5px] font-bold font-mono uppercase tracking-wider text-[var(--accent)] bg-[var(--accent-glow)] rounded-[4px]">
+                      {project.status === "live" ? "🟢 Live" : "🔧 Build"}
+                    </span>
+                    {project.award && (
+                      <span className="text-[11px] text-[#F59E0B] font-medium truncate max-w-[200px]">
+                        🏆 Winner
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* Source / Live Links */}
+                  <div className="flex items-center gap-2">
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded transition-colors"
+                        aria-label="View source code"
+                      >
+                        <GithubIcon size={14} />
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded transition-colors"
+                        aria-label="View live demo"
+                      >
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Project Title & Tagline */}
+                <h3 className="text-base font-bold text-[var(--text-primary)] leading-tight flex items-center gap-1 group-hover:text-[var(--accent)] transition-colors">
+                  {project.title}
+                  <ArrowUpRight size={13} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </h3>
+                <p className="text-[12px] font-mono text-[var(--text-muted)] mt-0.5 mb-3.5">
+                  {project.tagline}
+                </p>
+
+                {/* Project Description */}
+                <p className="text-[13.5px] text-[var(--text-secondary)] leading-relaxed mb-5">
+                  {project.description}
+                </p>
+              </div>
+
+              <div>
+                {/* Tech Chips */}
+                <div className="flex flex-wrap gap-1.5 border-t border-[var(--border-subtle)] pt-4">
+                  {project.stack.map(tag => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 text-[11px] font-mono text-[var(--text-muted)] bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-[4px]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function ProjectShowcase({ project, index }) {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
-
-  const isEven = index % 2 === 0;
-
-  return (
-    <div ref={containerRef} className="relative group">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-[var(--color-accent-primary)] opacity-[0.03] blur-[120px] rounded-full pointer-events-none transition-opacity duration-700 group-hover:opacity-[0.08]" />
-
-      <div className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-12 lg:gap-24 items-center`}>
-        
-        {/* Visual / Image Side */}
-        <div className="w-full lg:w-[55%] relative rounded-2xl overflow-hidden border border-[var(--color-border-bright)] bg-[var(--color-bg-secondary)] aspect-[16/10] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
-          {/* Top Bar Chrome */}
-          <div className="absolute top-0 left-0 w-full h-10 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border-subtle)] flex items-center px-4 gap-2 z-20">
-             <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-             <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-             <div className="ml-4 px-2 py-0.5 rounded text-[10px] font-mono text-[var(--color-text-muted)] bg-[var(--color-bg-primary)]">
-               {project.title.toLowerCase().replace(/\s+/g, '-')}.exe
-             </div>
-          </div>
-          
-          {/* Main Visual */}
-          <motion.div style={{ scale: imageScale }} className="absolute inset-0 w-full h-full mt-10 p-8 flex items-center justify-center bg-[var(--color-bg-primary)] relative">
-             <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(var(--color-text-primary) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-             
-             {/* Fake abstract visual for now */}
-             <div className="relative w-full h-full border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] rounded-lg flex flex-col p-6 shadow-2xl">
-               <div className="w-full h-32 bg-[var(--color-bg-elevated)] rounded border border-[var(--color-border-subtle)] mb-4 flex items-center justify-center">
-                  <Layers className="text-[var(--color-text-muted)] opacity-50" size={32} />
-               </div>
-               <div className="flex gap-4">
-                 <div className="w-1/3 h-24 bg-[var(--color-bg-elevated)] rounded border border-[var(--color-border-subtle)] flex items-center justify-center">
-                    <Box className="text-[var(--color-text-muted)] opacity-50" size={24} />
-                 </div>
-                 <div className="w-2/3 h-24 bg-[var(--color-bg-elevated)] rounded border border-[var(--color-border-subtle)] flex items-center justify-center">
-                    <Cpu className="text-[var(--color-text-muted)] opacity-50" size={24} />
-                 </div>
-               </div>
-             </div>
-          </motion.div>
-        </div>
-
-        {/* Content Side */}
-        <motion.div style={{ y }} className="w-full lg:w-[45%] flex flex-col justify-center">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="px-3 py-1 text-[11px] font-mono text-[var(--color-accent-primary)] bg-[var(--color-accent-glow)] rounded-full border border-[var(--color-accent-glow)]">
-              {project.status || "Production"}
-            </span>
-          </div>
-
-          <h3 className="text-3xl lg:text-5xl font-['Syne'] font-bold text-[var(--color-text-primary)] mb-6 leading-tight">
-            {project.title}
-          </h3>
-
-          <p className="text-[16px] leading-relaxed text-[var(--color-text-secondary)] mb-8">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2 mb-10">
-            {project.stack.map(tag => (
-              <span key={tag} className="px-3 py-1.5 text-[12px] font-medium text-[var(--color-text-muted)] bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)] rounded-md">
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-6">
-            {project.liveUrl && (
-              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 text-[14px] font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] transition-colors">
-                Initialize System <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-              </a>
-            )}
-            {project.githubUrl && (
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[14px] font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
-                <GithubIcon size={14} /> Source Code
-              </a>
-            )}
-          </div>
-        </motion.div>
-
-      </div>
-    </div>
   );
 }

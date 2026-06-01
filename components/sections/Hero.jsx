@@ -1,198 +1,164 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
-import { Mail, ArrowRight, Activity, Cpu, Database, Network } from "lucide-react";
-import dynamic from "next/dynamic";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Disc } from "lucide-react";
+import { 
+  GithubIcon, 
+  LinkedinIcon, 
+  XIcon, 
+  InstagramIcon, 
+  YoutubeIcon, 
+  ProductHuntIcon, 
+  MediumIcon, 
+  MailIcon,
+  CopyIcon,
+  CheckIcon
+} from "@/components/ui/Icons";
 import { PERSONAL } from "@/lib/constants";
 
-const Terminal = dynamic(() => import("@/components/ui/Terminal"), { ssr: false });
-
 export default function Hero() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  const [copied, setCopied] = useState(false);
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(PERSONAL.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  const SOCIALS = [
+    { icon: XIcon, href: "https://x.com/TechWithAkash", label: "Twitter / 𝕏" },
+    { icon: LinkedinIcon, href: PERSONAL.linkedinUrl, label: "LinkedIn" },
+    { icon: GithubIcon, href: PERSONAL.githubUrl, label: "GitHub" },
+    { icon: YoutubeIcon, href: "https://youtube.com/@TechWithAkash", label: "YouTube" },
+    { icon: InstagramIcon, href: "https://instagram.com/TechWithAkash", label: "Instagram" },
+    { icon: ProductHuntIcon, href: "https://www.producthunt.com/@techwithakash", label: "Product Hunt" },
+    { icon: MediumIcon, href: "https://medium.com/@techwithakash", label: "Medium" },
+    { icon: MailIcon, href: `mailto:${PERSONAL.email}`, label: "Email" },
+  ];
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden w-full pt-20 pb-32"
-    >
-      {/* Interactive Cursor Light */}
-      {mounted && (
+    <section id="hero" className="w-full max-w-2xl mx-auto px-6 pt-16 pb-12 transition-colors duration-300">
+      <div className="flex flex-col gap-6 text-left">
+        {/* Profile Header Row */}
         <motion.div
-          className="pointer-events-none fixed inset-0 z-0 hidden lg:block"
-          animate={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(79, 70, 229, 0.07), transparent 40%)`,
-          }}
-          transition={{ type: "tween", ease: "linear", duration: 0 }}
-        />
-      )}
-
-      {/* Grid Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none" 
-           style={{
-             backgroundImage: `linear-gradient(to right, var(--color-border-subtle) 1px, transparent 1px), linear-gradient(to bottom, var(--color-border-subtle) 1px, transparent 1px)`,
-             backgroundSize: '40px 40px',
-             maskImage: 'radial-gradient(ellipse 60% 80% at 50% 40%, black 10%, transparent 80%)',
-             WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 50% 40%, black 10%, transparent 80%)'
-           }} 
-      />
-
-      <motion.div 
-        style={{ y, opacity }}
-        className="w-full max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center text-center"
-      >
-        {/* Status Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--color-border-bright)] bg-[var(--color-bg-glass)] backdrop-blur-md mb-8"
+          transition={{ duration: 0.5 }}
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-7"
         >
-          <div className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-status-green)] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-status-green)]"></span>
+          {/* Avatar Container */}
+          <div className="shrink-0">
+            <img
+              src="/professional_avatar.png"
+              alt="Akash Vishwakarma"
+              className="w-24 h-24 rounded-full border-[3px] border-amber-400 object-cover shadow-sm bg-[var(--bg-secondary)]"
+            />
           </div>
-          <span className="text-[11px] font-mono tracking-widest uppercase text-[var(--color-text-secondary)]">
-            System Online · {PERSONAL.availability}
-          </span>
-        </motion.div>
-
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-6 w-full"
-        >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-[800] leading-[1.1] tracking-[-0.03em] font-['Syne'] text-[var(--color-text-primary)] break-words">
-            Akash <br className="md:hidden" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-[var(--color-accent-primary)] to-[var(--color-text-secondary)] animate-gradient-x bg-[length:200%_auto] inline-block ml-0 md:ml-4">
-              Vishwakarma
-            </span>
-          </h1>
-        </motion.div>
-
-        {/* Subheading & Description */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mx-auto flex flex-col items-center"
-        >
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-6">
-            <span className="text-lg lg:text-xl font-medium text-[var(--color-text-primary)]">Full-Stack Engineer</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-border-bright)] hidden md:block"></span>
-            <span className="text-lg lg:text-xl font-medium text-[var(--color-text-primary)]">AI Systems Architect</span>
-          </div>
-          <p className="text-[17px] leading-relaxed text-[var(--color-text-secondary)] mb-10">
-            I build production-grade operating systems, intelligent LLM pipelines, and highly scalable web applications. Bridging the gap between beautiful cinematic interfaces and rigorous backend architecture.
-          </p>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap justify-center items-center gap-5 w-full mb-20"
-        >
-          <button 
-            onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="group relative px-6 py-3.5 bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] rounded-lg font-medium text-[15px] overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Initialize Sequence <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </span>
-          </button>
           
-          <div className="flex items-center gap-3">
-            {[
-              { href: PERSONAL.githubUrl, icon: <GithubIcon size={18} /> },
-              { href: PERSONAL.linkedinUrl, icon: <LinkedinIcon size={18} /> },
-              { href: `mailto:${PERSONAL.email}`, icon: <Mail size={18} /> },
-            ].map((link, i) => (
-              <a
-                key={i}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-lg border border-[var(--color-border-bright)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)]"
+          {/* Name & Title Block */}
+          <div className="flex flex-col gap-1.5">
+            <h1 className="text-2.5xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl font-sans">
+              {PERSONAL.name}
+            </h1>
+            <p className="text-[13.5px] text-[var(--text-secondary)] font-medium flex flex-wrap items-center gap-x-2 gap-y-1.5">
+              <span>Full-Stack Engineer</span>
+              <span className="text-[var(--text-muted)] font-normal">·</span>
+              <span>AI Specialist</span>
+              <span className="text-[var(--text-muted)] font-normal">·</span>
+              <span 
+                className="inline-flex items-center gap-1.5 group/email cursor-pointer text-[var(--text-secondary)] hover:text-[var(--text-primary)] select-all"
+                onClick={handleCopyEmail}
+                title="Click to copy email address"
               >
-                {link.icon}
-              </a>
-            ))}
+                <span className="underline decoration-dotted decoration-[var(--text-muted)] underline-offset-4 font-normal">
+                  {PERSONAL.email}
+                </span>
+                {copied ? (
+                  <CheckIcon size={12} className="text-green-500" />
+                ) : (
+                  <CopyIcon size={12} className="text-[var(--text-muted)] group-hover/email:text-[var(--text-primary)] transition-colors shrink-0" />
+                )}
+                {copied && (
+                  <span className="text-[10px] text-green-500 font-mono ml-0.5">
+                    Copied!
+                  </span>
+                )}
+              </span>
+            </p>
           </div>
         </motion.div>
 
-        {/* BOTTOM: Terminal / Dashboard Elements */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
+        {/* Short Tagline / Bio */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative perspective-1000 hidden md:block w-full max-w-3xl mx-auto"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-[14.5px] text-[var(--text-secondary)] max-w-2xl leading-relaxed font-normal"
         >
-          {/* Main Terminal Window */}
-          <div className="relative z-10 shadow-[0_0_80px_rgba(79,70,229,0.15)] rounded-[12px] border border-[var(--color-border-subtle)] bg-[#05050A]">
-             <Terminal />
+          {PERSONAL.tagline}
+        </motion.p>
+
+        {/* Currently Shipping / Status Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="flex items-center gap-2 text-[12.5px] text-[var(--text-muted)] font-mono"
+        >
+          <Disc size={13} className="animate-spin text-[var(--accent)]" />
+          <span>Currently shipping</span>
+          <span>—</span>
+          <span className="text-[var(--text-secondary)] font-medium">WealthWise AI Dashboard</span>
+        </motion.div>
+
+        {/* Social Icons Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="flex flex-col gap-3.5 mt-2 border-t border-[var(--border-subtle)] pt-6"
+        >
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {SOCIALS.map((social) => {
+              const Icon = social.icon;
+              return (
+                <div key={social.label} className="relative group/social">
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-8.5 h-8.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-bright)] hover:bg-[var(--bg-elevated)] transition-all duration-150 shadow-sm"
+                    aria-label={social.label}
+                  >
+                    <Icon size={15} />
+                  </a>
+                  {/* Custom micro-tooltip */}
+                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-0.5 bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-mono rounded opacity-0 pointer-events-none group-hover/social:opacity-100 transition-opacity duration-150 whitespace-nowrap shadow-md z-20">
+                    {social.label}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Decorative floating elements */}
-          <motion.div 
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-10 -right-10 w-64 p-4 rounded-xl border border-[var(--color-border-bright)] bg-[var(--color-bg-glass)] backdrop-blur-xl z-20 shadow-2xl hidden lg:block"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-mono text-[var(--color-text-muted)] uppercase tracking-wider">Neural Net Status</span>
-              <Activity size={14} className="text-[var(--color-accent-primary)]" />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-[var(--color-text-secondary)]">Latency</span>
-                <span className="text-xs font-mono text-[var(--color-status-green)]">24ms</span>
-              </div>
-              <div className="w-full h-1 bg-[var(--color-bg-primary)] rounded-full overflow-hidden">
-                <div className="h-full bg-[var(--color-accent-primary)] w-[85%] rounded-full"></div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            animate={{ y: [10, -10, 10] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -bottom-6 -left-10 w-48 p-4 rounded-xl border border-[var(--color-border-bright)] bg-[var(--color-bg-glass)] backdrop-blur-xl z-20 shadow-2xl hidden lg:block"
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <Cpu size={14} className="text-[var(--color-text-secondary)]" />
-              <span className="text-[10px] font-mono text-[var(--color-text-muted)] uppercase tracking-wider">Nodes Active</span>
-            </div>
-            <div className="text-xl font-['Syne'] font-bold text-[var(--color-text-primary)]">1,024</div>
-          </motion.div>
+          {/* Pixel Companion Widget */}
+          <div className="flex items-center gap-1.5 pl-0.5">
+            <span className="animate-bounce inline-block text-xs">🐱</span>
+            <a
+              href="https://github.com/TechWithAkash"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-mono text-[var(--text-muted)] hover:underline hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors"
+            >
+              <span>companion.js</span>
+              <span className="px-1 py-0.2 bg-[var(--color-status-green-glow)] border border-[var(--color-status-green)]/20 rounded-[4px] text-[8px] text-[var(--color-status-green)] font-bold uppercase tracking-wider">
+                Online
+              </span>
+            </a>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, ArrowRight, MapPin, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { PERSONAL } from "@/lib/constants";
 
 export default function Contact() {
@@ -16,7 +16,6 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!formData.name || !formData.email || !formData.message) return;
     
     setStatus("loading");
@@ -44,107 +43,82 @@ export default function Contact() {
       setErrorMessage("Network error. Please try again later.");
     }
   };
+
   return (
-    <section id="contact" className="relative py-32 bg-[var(--color-bg-primary)] z-10 border-t border-[var(--color-border-subtle)] overflow-hidden">
-      
-      {/* Background Lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-[var(--color-accent-primary)] opacity-[0.05] blur-[100px] rounded-full pointer-events-none" />
+    <section id="contact" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-12">
+        {/* Section Title */}
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+          Let&apos;s Build Something
+        </h2>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          
-          {/* Left: Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <span className="h-[1px] w-12 bg-[var(--color-status-green)]"></span>
-              <span className="text-[12px] font-mono tracking-[0.2em] uppercase text-[var(--color-status-green)]">
-                Secure Channel Open
-              </span>
-            </div>
-            
-            <h2 className="text-4xl lg:text-6xl font-['Syne'] font-bold text-[var(--color-text-primary)] mb-6 leading-tight">
-              Initialize <br />
-              <span className="text-[var(--color-text-secondary)]">Communication</span>
-            </h2>
-
-            <p className="text-lg text-[var(--color-text-secondary)] mb-10 max-w-md leading-relaxed">
-              Actively seeking internships and SDE roles. If you're building intelligent systems and need a rigorous engineer, let's connect.
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Coordinates */}
+          <div className="md:col-span-5 flex flex-col gap-6">
+            <p className="text-[13.5px] leading-relaxed text-[var(--text-secondary)]">
+              I am actively seeking software engineering internships and junior SDE roles. If you&apos;re building high-quality product applications and need a detail-oriented full-stack developer, I would love to hear from you.
             </p>
 
-            <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-4 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors group cursor-pointer w-max">
-                <div className="w-12 h-12 rounded-xl border border-[var(--color-border-bright)] bg-[var(--color-bg-elevated)] flex items-center justify-center group-hover:border-[var(--color-accent-primary)] transition-colors">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <div className="text-[11px] font-mono tracking-widest uppercase text-[var(--color-text-muted)] mb-1">Email Endpoint</div>
-                  <a href={`mailto:${PERSONAL.email}`} className="text-lg font-medium">{PERSONAL.email}</a>
-                </div>
+            <div className="flex flex-col gap-4 text-xs font-mono text-[var(--text-secondary)]">
+              <div className="flex items-center gap-3">
+                <Mail size={13} className="text-[var(--text-muted)]" />
+                <a href={`mailto:${PERSONAL.email}`} className="hover:text-[var(--accent)] hover:underline">
+                  {PERSONAL.email}
+                </a>
               </div>
-
-              <div className="flex items-center gap-4 text-[var(--color-text-secondary)] group w-max">
-                <div className="w-12 h-12 rounded-xl border border-[var(--color-border-bright)] bg-[var(--color-bg-elevated)] flex items-center justify-center group-hover:border-[var(--color-accent-primary)] transition-colors">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <div className="text-[11px] font-mono tracking-widest uppercase text-[var(--color-text-muted)] mb-1">Current Coordinates</div>
-                  <div className="text-lg font-medium">{PERSONAL.location}</div>
-                </div>
+              <div className="flex items-center gap-3">
+                <MapPin size={13} className="text-[var(--text-muted)]" />
+                <span>{PERSONAL.location}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-[var(--color-status-green)] animate-pulse"></span>
+                <span className="text-[11px] uppercase tracking-wider text-[var(--color-status-green)] font-bold">
+                  {PERSONAL.availability}
+                </span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Right: Interface Form */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="rounded-2xl border border-[var(--color-border-bright)] bg-[var(--color-bg-secondary)]/50 backdrop-blur-xl p-8 lg:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] relative"
-          >
-            <div className="absolute top-0 right-0 p-6 flex gap-2">
-              <div className="w-2 h-2 rounded-full bg-[var(--color-border-bright)]" />
-              <div className="w-2 h-2 rounded-full bg-[var(--color-border-bright)]" />
-              <div className="w-2 h-2 rounded-full bg-[var(--color-accent-primary)]" />
-            </div>
-
-            <form className="space-y-6 mt-4" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <label className="text-[11px] font-mono tracking-widest uppercase text-[var(--color-text-muted)]">Origin Identifier</label>
-                <input 
-                  type="text" 
+          {/* Right Column: Form */}
+          <div className="md:col-span-7 p-6 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] shadow-sm">
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[11px] font-mono tracking-wider uppercase text-[var(--text-muted)]">
+                  Name
+                </label>
+                <input
+                  type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
                   disabled={status === "loading" || status === "success"}
                   placeholder="John Doe"
-                  className="w-full bg-[var(--color-bg-primary)] border border-[var(--color-border-subtle)] rounded-lg px-4 py-3.5 text-[var(--color-text-primary)] text-[15px] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-all disabled:opacity-50"
+                  className="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-[var(--text-primary)] text-[14px] focus:outline-none focus:border-[var(--accent)] transition-all disabled:opacity-50"
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[11px] font-mono tracking-widest uppercase text-[var(--color-text-muted)]">Return Address</label>
-                <input 
-                  type="email" 
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[11px] font-mono tracking-wider uppercase text-[var(--text-muted)]">
+                  Email
+                </label>
+                <input
+                  type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
                   disabled={status === "loading" || status === "success"}
                   placeholder="john@example.com"
-                  className="w-full bg-[var(--color-bg-primary)] border border-[var(--color-border-subtle)] rounded-lg px-4 py-3.5 text-[var(--color-text-primary)] text-[15px] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-all disabled:opacity-50"
+                  className="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-[var(--text-primary)] text-[14px] focus:outline-none focus:border-[var(--accent)] transition-all disabled:opacity-50"
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[11px] font-mono tracking-widest uppercase text-[var(--color-text-muted)]">Payload</label>
-                <textarea 
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[11px] font-mono tracking-wider uppercase text-[var(--text-muted)]">
+                  Message
+                </label>
+                <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -152,45 +126,44 @@ export default function Contact() {
                   disabled={status === "loading" || status === "success"}
                   rows={4}
                   placeholder="Message content..."
-                  className="w-full bg-[var(--color-bg-primary)] border border-[var(--color-border-subtle)] rounded-lg px-4 py-3.5 text-[var(--color-text-primary)] text-[15px] focus:outline-none focus:border-[var(--color-accent-primary)] focus:ring-1 focus:ring-[var(--color-accent-primary)] transition-all resize-none disabled:opacity-50"
+                  className="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-[var(--text-primary)] text-[14px] focus:outline-none focus:border-[var(--accent)] transition-all resize-none disabled:opacity-50"
                 />
               </div>
 
               {status === "error" && (
-                <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 p-3 rounded-lg border border-red-400/20">
-                  <AlertCircle size={16} />
+                <div className="flex items-center gap-2 text-red-500 text-xs bg-red-500/5 p-3 rounded-lg border border-red-500/10">
+                  <AlertCircle size={14} className="shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
               {status === "success" && (
-                <div className="flex items-center gap-2 text-[var(--color-status-green)] text-sm bg-[var(--color-status-green)]/10 p-3 rounded-lg border border-[var(--color-status-green)]/20">
-                  <CheckCircle2 size={16} />
-                  <span>Transmission successful. I'll get back to you soon.</span>
+                <div className="flex items-center gap-2 text-[var(--color-status-green)] text-xs bg-[var(--color-status-green-glow)] p-3 rounded-lg border border-[var(--color-status-green-glow)]">
+                  <CheckCircle2 size={14} className="shrink-0" />
+                  <span>Message delivered successfully! I will reply shortly.</span>
                 </div>
               )}
 
-              <button 
+              <button
                 type="submit"
                 disabled={status === "loading" || status === "success"}
-                className="w-full group relative px-6 py-4 bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] rounded-lg font-medium text-[15px] overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-80 disabled:pointer-events-none"
+                className="w-full group px-5 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] rounded-lg font-bold text-[13px] tracking-wider uppercase transition-transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 disabled:opacity-75 disabled:pointer-events-none"
               >
                 {status === "idle" && (
-                  <>Transmit Payload <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></>
+                  <>Transmit Payload <Send size={13} /></>
                 )}
                 {status === "loading" && (
-                  <><Loader2 size={16} className="animate-spin" /> Establishing Connection...</>
+                  <><Loader2 size={13} className="animate-spin" /> Uploading...</>
                 )}
                 {status === "success" && (
-                  <>Payload Delivered</>
+                  <>Delivered</>
                 )}
                 {status === "error" && (
-                  <>Retry Transmission</>
+                  <>Retry</>
                 )}
               </button>
             </form>
-          </motion.div>
-
+          </div>
         </div>
       </div>
     </section>

@@ -37,7 +37,7 @@ export default function AchievementCard({ achievement }) {
 
       <div style={{ fontSize: "2rem", marginBottom: "12px" }}>{icon}</div>
       <h3 style={{
-        fontFamily: "var(--font-syne), 'Syne', sans-serif",
+        fontFamily: "var(--font-sans), 'Hanken Grotesk', sans-serif",
         fontSize: "var(--text-base)",
         fontWeight: 700,
         color: "var(--text-primary)",

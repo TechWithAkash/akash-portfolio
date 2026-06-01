@@ -1,19 +1,12 @@
-import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteMetadata, jsonLd } from "@/lib/metadata";
 
-const syne = Syne({
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-hanken-grotesk",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  display: "swap",
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -58,12 +51,13 @@ export const metadata = {
 };
 
 import SmoothScroll from "@/components/ui/SmoothScroll";
+import CursorPet from "@/components/ui/CursorPet";
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
+      className={`${hankenGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <script
@@ -73,6 +67,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <SmoothScroll>{children}</SmoothScroll>
+        <CursorPet />
       </body>
     </html>
   );

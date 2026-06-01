@@ -32,7 +32,7 @@ export default function ExperienceItem({ item, isLast = false }) {
       <div style={{ flex: 1, paddingBottom: isLast ? 0 : "40px" }}>
         <div style={{ marginBottom: "12px" }}>
           <h3 style={{
-            fontFamily: "var(--font-syne), 'Syne', sans-serif",
+            fontFamily: "var(--font-sans), 'Hanken Grotesk', sans-serif",
             fontSize: "var(--text-lg)",
             fontWeight: 700,
             color: "var(--text-primary)",

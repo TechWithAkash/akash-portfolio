@@ -1,118 +1,77 @@
 "use client";
 
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import { motion } from "framer-motion";
 import { ACHIEVEMENTS } from "@/lib/constants";
+import { Trophy, Award, Sparkles, Star } from "lucide-react";
 
 export default function Achievements() {
-  const highlight = ACHIEVEMENTS.filter(a => a.highlight);
+  const highlighted = ACHIEVEMENTS.filter(a => a.highlight);
   const rest = ACHIEVEMENTS.filter(a => !a.highlight);
 
   return (
-    <section id="achievements" className="section" style={{ borderTop: "1px solid var(--border)" }}>
-      <div className="container">
-        <ScrollReveal>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px", flexWrap: "wrap", gap: "16px" }}>
-            <div>
-              <p className="section-eyebrow">Recognition</p>
-              <h2 className="section-heading">Competing at the national level</h2>
-            </div>
-          </div>
-        </ScrollReveal>
+    <section id="achievements" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-12">
+        {/* Section Heading */}
+        <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
+          Recognition & Achievements
+        </h2>
 
-        {/* Top 3 highlighted */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "12px" }}>
-          {highlight.map((a, i) => (
-            <ScrollReveal key={a.id} delay={i * 60}>
-              <div
-                style={{
-                  background: "var(--bg-secondary)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "10px",
-                  padding: "22px",
-                  transition: "all var(--t-base)",
-                  position: "relative",
-                  overflow: "hidden",
-                  cursor: "default",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "rgba(16,185,129,0.35)";
-                  e.currentTarget.style.background = "var(--bg-elevated)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.background = "var(--bg-secondary)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
-              >
-                <div style={{ height: "2px", background: "linear-gradient(90deg, var(--accent), #34d399)", position: "absolute", top: 0, left: 0, right: 0 }} />
-                <div style={{ fontSize: "1.5rem", marginBottom: "10px" }}>{a.icon}</div>
-                <h3 style={{
-                  fontFamily: "var(--font-syne), 'Syne', sans-serif",
-                  fontSize: "var(--text-sm)",
-                  fontWeight: 700,
-                  color: "var(--text-primary)",
-                  marginBottom: "4px",
-                  lineHeight: 1.35,
-                }}>{a.title}</h3>
-                <p style={{ fontSize: "var(--text-xs)", color: "var(--accent)", fontFamily: "var(--font-jetbrains-mono), monospace", marginBottom: "8px" }}>
-                  {a.event}
+        {/* Highlighted items */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          {highlighted.map((ach, idx) => (
+            <motion.div
+              key={ach.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="p-5 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-elevated)] transition-colors duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div className="text-2xl mb-3">{ach.icon}</div>
+                <h3 className="text-[14px] font-bold text-[var(--text-primary)] leading-tight mb-1">
+                  {ach.title}
+                </h3>
+                <p className="text-[11.5px] font-mono text-[var(--accent)] mb-2">
+                  {ach.event}
                 </p>
-                <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                  {a.description}
+                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">
+                  {ach.description}
                 </p>
               </div>
-            </ScrollReveal>
+            </motion.div>
           ))}
         </div>
 
-        {/* Rest as a table-style list */}
-        <ScrollReveal delay={200}>
-          <div style={{
-            border: "1px solid var(--border)",
-            borderRadius: "10px",
-            overflow: "hidden",
-            background: "var(--bg-secondary)",
-          }}>
-            {rest.map((a, i) => (
-              <div
-                key={a.id}
-                style={{
-                  display: "flex",
-                  gap: "16px",
-                  alignItems: "flex-start",
-                  padding: "16px 20px",
-                  borderTop: i > 0 ? "1px solid var(--border)" : "none",
-                  transition: "background var(--t-fast)",
-                  cursor: "default",
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = "var(--bg-elevated)"}
-                onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-              >
-                <span style={{ fontSize: "1.2rem", flexShrink: 0 }}>{a.icon}</span>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "6px" }}>
-                    <h3 style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text-primary)" }}>{a.title}</h3>
-                    <span style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)", fontFamily: "var(--font-jetbrains-mono), monospace" }}>
-                      {a.event}
-                    </span>
-                  </div>
-                  <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", marginTop: "2px" }}>{a.description}</p>
+        {/* Other achievements in a simple clean list */}
+        <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50 divide-y divide-[var(--border-subtle)] overflow-hidden">
+          {rest.map((ach, idx) => (
+            <motion.div
+              key={ach.id}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              className="flex items-start gap-4 p-4 hover:bg-[var(--bg-elevated)] transition-colors duration-200"
+            >
+              <span className="text-lg shrink-0 mt-0.5">{ach.icon}</span>
+              <div className="flex-1 flex flex-col md:flex-row md:justify-between md:items-start gap-1">
+                <div>
+                  <h4 className="text-[13.5px] font-bold text-[var(--text-primary)]">
+                    {ach.title}
+                  </h4>
+                  <p className="text-[13px] text-[var(--text-secondary)] mt-0.5">
+                    {ach.description}
+                  </p>
                 </div>
+                <span className="text-[11px] font-mono text-[var(--text-muted)] shrink-0">
+                  {ach.event}
+                </span>
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+            </motion.div>
+          ))}
+        </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          #achievements .container > div:nth-child(2) { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 560px) {
-          #achievements .container > div:nth-child(2) { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }

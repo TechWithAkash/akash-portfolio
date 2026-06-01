@@ -1,79 +1,63 @@
 "use client";
 
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import { motion } from "framer-motion";
 import { SKILLS } from "@/lib/constants";
 
 export default function Skills() {
   const groups = Object.entries(SKILLS);
 
   return (
-    <section id="skills" className="section" style={{ borderTop: "1px solid var(--border)" }}>
-      <div className="container">
-        <ScrollReveal>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "48px", flexWrap: "wrap", gap: "16px" }}>
-            <div>
-              <p className="section-eyebrow">Skills</p>
-              <h2 className="section-heading">Technical Stack</h2>
-            </div>
-            <p style={{ color: "var(--text-muted)", fontSize: "var(--text-sm)", maxWidth: "280px", textAlign: "right" }}>
-              Grouped by domain. No skill bars. No percentages.
+    <section id="skills" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-12">
+        {/* Section Heading */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
+              Technical Stack
+            </h2>
+            <p className="text-xs text-[var(--text-muted)] mt-1">
+              My engineering capabilities and specialized toolsets.
             </p>
           </div>
-        </ScrollReveal>
+          <span className="text-[11px] font-mono text-[var(--text-muted)] hidden md:inline">
+            Grouped by Domain · No Subjective Metrics
+          </span>
+        </div>
 
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "1px",
-          background: "var(--border)",
-          border: "1px solid var(--border)",
-          borderRadius: "10px",
-          overflow: "hidden",
-        }}>
-          {groups.map(([groupName, { icon, skills }], i) => (
-            <ScrollReveal key={groupName} delay={i * 40}>
-              <div
-                style={{
-                  background: "var(--bg-secondary)",
-                  padding: "24px",
-                  height: "100%",
-                  transition: "background var(--t-fast)",
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = "var(--bg-elevated)"}
-                onMouseLeave={e => e.currentTarget.style.background = "var(--bg-secondary)"}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
-                  <span style={{ fontSize: "1rem" }}>{icon}</span>
-                  <span style={{
-                    fontSize: "var(--text-xs)",
-                    fontWeight: 600,
-                    color: "var(--text-secondary)",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    fontFamily: "var(--font-jetbrains-mono), monospace",
-                  }}>
-                    {groupName}
-                  </span>
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
-                  {skills.map(skill => (
-                    <span key={skill} className="chip">{skill}</span>
-                  ))}
-                </div>
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {groups.map(([groupName, { icon, skills }], idx) => (
+            <motion.div
+              key={groupName}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              className="p-5 rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-elevated)] transition-colors duration-300 flex flex-col gap-3"
+            >
+              {/* Group Title */}
+              <div className="flex items-center gap-2 pb-2.5 border-b border-[var(--border-subtle)]">
+                <span className="text-sm shrink-0">{icon}</span>
+                <h3 className="text-[12.5px] font-bold font-mono tracking-wider uppercase text-[var(--text-primary)]">
+                  {groupName}
+                </h3>
               </div>
-            </ScrollReveal>
+
+              {/* Skills Tags */}
+              <div className="flex flex-wrap gap-1.5 mt-1">
+                {skills.map(skill => (
+                  <span
+                    key={skill}
+                    className="px-2.5 py-0.5 text-[11.5px] font-medium text-[var(--text-secondary)] bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-[4px] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-200"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          #skills .container > div:last-child { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 560px) {
-          #skills .container > div:last-child { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }
