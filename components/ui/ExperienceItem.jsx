@@ -37,6 +37,7 @@ export default function ExperienceItem({ item, isLast = false }) {
             fontWeight: 700,
             color: "var(--text-primary)",
             marginBottom: "4px",
+            
           }}>{role}</h3>
           <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
             <span style={{ color: "var(--accent)", fontSize: "var(--text-sm)", fontWeight: 500 }}>{company}</span>
