@@ -6,8 +6,8 @@ import { Award, BookOpen, GraduationCap } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="education" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-12">
+    <section id="education" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-6">
         {/* Section Title */}
         <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
           Academic Credentials

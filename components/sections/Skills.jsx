@@ -7,8 +7,8 @@ export default function Skills() {
   const groups = Object.entries(SKILLS);
 
   return (
-    <section id="skills" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-12">
+    <section id="skills" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-6">
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>

@@ -9,8 +9,8 @@ export default function Achievements() {
   const rest = ACHIEVEMENTS.filter(a => !a.highlight);
 
   return (
-    <section id="achievements" className="w-full max-w-2xl mx-auto px-6 py-12 transition-colors duration-300">
-      <div className="border-t border-[var(--border-subtle)] pt-12">
+    <section id="achievements" className="w-full max-w-2xl mx-auto px-6 py-6 transition-colors duration-300">
+      <div className="border-t border-[var(--border-subtle)] pt-6">
         {/* Section Heading */}
         <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)] mb-8">
           Recognition & Achievements
