@@ -7,7 +7,7 @@ export default function Skills() {
   const groups = Object.entries(SKILLS);
 
   return (
-    <section id="skills" className="w-full max-w-2xl mx-auto px-4 sm:px-6 py-2 transition-colors duration-300">
+    <section id="skills" className="w-full px-4 sm:px-6 py-2 transition-colors duration-300">
       <div className="border-t border-[var(--border-subtle)] pt-4">
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">

@@ -19,6 +19,7 @@ export default function CommandPalette({ isOpen, onClose }) {
 
   const sectionItems = [
     { id: "sec-experience", label: "Jump to Experience", description: "Scroll to work experience timeline", shortcut: "E", elementId: "experience", icon: <Briefcase size={16} /> },
+    { id: "sec-blog", label: "Jump to Blog", description: "Scroll to latest blog posts", shortcut: "L", elementId: "blog", icon: <BookOpen size={16} /> },
     { id: "sec-devpersonal", label: "Jump to Development & Personal", description: "Scroll to gears, setup, books & movies", shortcut: "D", elementId: "dev-personal", icon: <Terminal size={16} /> },
     { id: "sec-projects", label: "Jump to Projects", description: "Scroll to featured projects grid", shortcut: "P", elementId: "projects", icon: <Folder size={16} /> },
     { id: "sec-skills", label: "Jump to Skills", description: "Scroll to core technical capabilities", shortcut: "S", elementId: "skills", icon: <Code size={16} /> },
@@ -113,10 +114,11 @@ export default function CommandPalette({ isOpen, onClose }) {
   const hasResults = filteredNav.length > 0 || filteredSec.length > 0;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-black/60 backdrop-blur-sm transition-opacity">
+    <div className="fixed inset-0 z-50 flex items-start justify-center px-4 bg-black/50 backdrop-blur-[2px]" style={{ paddingTop: "18vh" }}>
       <div 
         ref={containerRef}
-        className="w-full max-w-lg overflow-hidden rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] shadow-2xl animate-in fade-in zoom-in-95 duration-150"
+        className="overflow-hidden rounded-xl border border-[var(--border-bright)] bg-[var(--bg-secondary)] shadow-2xl"
+        style={{ width: "100%", maxWidth: "480px" }}
       >
         {/* Search Input Box */}
         <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] px-4 py-3">
@@ -138,7 +140,7 @@ export default function CommandPalette({ isOpen, onClose }) {
         </div>
 
         {/* Content List */}
-        <div className="max-h-[350px] overflow-y-auto p-2 custom-scrollbar flex flex-col gap-3">
+        <div className="max-h-[480px] overflow-y-auto p-2 custom-scrollbar flex flex-col gap-3">
           {!hasResults ? (
             <div className="p-4 text-center text-sm text-[var(--text-muted)] font-mono">
               No results found.

@@ -61,7 +61,7 @@ export default function BlogPage() {
   return (
     <div className="relative min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
       <Navbar />
-      <main className="max-w-2xl mx-auto px-6 py-16">
+      <main className="px-4 sm:px-6 py-16" style={{ maxWidth: "620px", marginLeft: "auto", marginRight: "auto", width: "100%" }}>
         {/* Page Title */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}

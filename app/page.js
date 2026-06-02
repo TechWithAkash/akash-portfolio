@@ -14,7 +14,10 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
       <Navbar />
-      <main className="relative z-10 flex flex-col items-start w-full max-w-2xl mx-auto pt-3 pb-6">
+      <main
+        className="relative z-10 pt-4 pb-6"
+        style={{ maxWidth: "620px", marginLeft: "auto", marginRight: "auto", width: "100%" }}
+      >
         <Hero />
         <Experience />
         <BlogSnippet />

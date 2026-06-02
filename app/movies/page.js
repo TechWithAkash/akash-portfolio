@@ -44,7 +44,7 @@ export default function Movies() {
     <div className="relative min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
       <Navbar />
       
-      <main className="max-w-2xl mx-auto px-6 py-12">
+      <main className="px-4 sm:px-6 py-12" style={{ maxWidth: "620px", marginLeft: "auto", marginRight: "auto", width: "100%" }}>
         {/* Back Link */}
         <div className="mb-8">
           <Link 
