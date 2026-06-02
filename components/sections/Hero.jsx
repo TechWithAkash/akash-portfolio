@@ -8,7 +8,6 @@ import {
   LinkedinIcon,
   XIcon,
   InstagramIcon,
-  YoutubeIcon,
   ProductHuntIcon,
   MediumIcon,
   MailIcon,
@@ -27,13 +26,12 @@ export default function Hero() {
   };
 
   const SOCIALS = [
-    { icon: XIcon, href: "https://x.com/TechWithAkash", label: "Twitter / 𝕏" },
+    { icon: XIcon, href: "https://x.com/AKASHVISHW64779", label: "Twitter / 𝕏" },
     { icon: LinkedinIcon, href: PERSONAL.linkedinUrl, label: "LinkedIn" },
     { icon: GithubIcon, href: PERSONAL.githubUrl, label: "GitHub" },
-    { icon: YoutubeIcon, href: "https://youtube.com/@TechWithAkash", label: "YouTube" },
-    { icon: InstagramIcon, href: "https://instagram.com/TechWithAkash", label: "Instagram" },
-    { icon: ProductHuntIcon, href: "https://www.producthunt.com/@techwithakash", label: "Product Hunt" },
-    { icon: MediumIcon, href: "https://medium.com/@techwithakash", label: "Medium" },
+    { icon: InstagramIcon, href: "https://www.instagram.com/akashvishwalarma45/", label: "Instagram" },
+    { icon: ProductHuntIcon, href: "https://www.producthunt.com/@akash_vishwakarma5", label: "Product Hunt" },
+    { icon: MediumIcon, href: "https://medium.com/@vishwakarmaakashav17", label: "Medium" },
     { icon: MailIcon, href: `mailto:${PERSONAL.email}`, label: "Email" },
   ];
 
